@@ -16,12 +16,22 @@ async function run() {
         await client.connect()
 
         const HomeDesignCollection = client.db("Luxury_Living").collection("Home_Design")
+        const LuxuryServiceCollection = client.db("Luxury_Living").collection("Luxury_Service")
 
+        // All design Get
         app.get('/designs', async (req, res) => {
             const query = {};
             const cursor = HomeDesignCollection.find(query);
             const designs = await cursor.toArray();
             res.send(designs);
+        })
+
+        // All Service Get
+        app.get('/services', async (req, res) => {
+            const query = {};
+            const cursor = LuxuryServiceCollection.find(query);
+            const services = await cursor.toArray();
+            res.send(services);
         })
 
 
