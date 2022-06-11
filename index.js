@@ -15,9 +15,15 @@ async function run() {
     try {
         await client.connect()
 
-        app.get('/home', (req, res) => {
-            console.log('Mission Luxury Living!!!')
+        const HomeDesignCollection = client.db("Luxury_Living").collection("Home_Design")
+
+        app.get('/designs', async (req, res) => {
+            const query = {};
+            const cursor = HomeDesignCollection.find(query);
+            const designs = await cursor.toArray();
+            res.send(designs);
         })
+
 
     }
     finally {
